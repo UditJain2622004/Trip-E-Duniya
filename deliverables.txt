@@ -1,0 +1,41 @@
+================= FRONTEND ===============
+
+----- RITIK, SAGAR ---------
+User registration and login forms
+Client-side form validation
+
+
+----- ROHIT, SAMIRAN ---------
+Search Bar with filters
+
+
+----- VIKRAM, ARSHAD ---------
+Search results page - Search result card
+
+
+----- PRIYANKA ------
+Homepage - Good looking Homepage
+
+
+
+State management (e.g., using React Context or Redux)
+Detailed destination information page
+User profile and saved itineraries
+Integration with backend API
+
+
+
+================= BACKEND ===============
+User authentication and authorization system
+
+Database design and implementation (for storing user data, travel destinations, and preferences)
+
+RESTful API endpoints for:
+    User registration and login
+    Searching destinations based on preferences
+    Retrieving detailed information about specific destinations
+    Saving and managing user itineraries
+
+
+Integration with external APIs (e.g., weather, attractions, flight information)
+Data processing and filtering algorithms
