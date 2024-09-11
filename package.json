@@ -1,0 +1,18 @@
+{
+  "name": "trip-e-duniya",
+  "version": "1.0.0",
+  "description": "A **Travel Assistant Website** where users can search for places to visit based on their preferences, filters, and interests. The goal is to provide personalized travel recommendations, ensuring that users find destinations that match their criteria seamlessly.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.3.0",
+    "react-router-dom": "^6.26.2",
+    "tailwindcss": "^3.4.10"
+  }
+}
