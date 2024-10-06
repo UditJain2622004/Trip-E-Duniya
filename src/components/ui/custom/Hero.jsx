@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "../button";
+import {Link} from 'react-router-dom';
 function Hero() {
   return (
     <div className="flex flex-col items-center mx-56 gap-9">
@@ -16,7 +17,9 @@ function Hero() {
       <p className="text-xl text-gray-500 text-center">
         Your personal trip planner and travel companion
       </p>
+      <Link to={'/create-trip'}>
       <Button>Get Started, It's free</Button>
+      </Link>
     </div>
   );
 }
