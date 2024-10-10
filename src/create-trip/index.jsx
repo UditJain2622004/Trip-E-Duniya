@@ -25,50 +25,8 @@ function CreateTrip() {
   const [place, setPlace] = useState("");
   const [formData, setFormData] = useState([]);
   const [openDialogue, setopenDialogue] = useState(false);
-  // const [googleResponse, setGoogleResponse] = useState(null);
 
-  // Listen for messages from the popup
-  // useEffect(() => {
-  //   // Event listener to receive messages
-  //   const handleMessage = (event) => {
-  //     if (event.origin === "http://localhost:5173") {
-  //       if (event.data && event.data.type === "google-login-success") {
-  //         // Successfully received Google login response
-  //         console.log("Login Success: ", event.data.payload);
-  //         localStorage.setItem("user", JSON.stringify(event.data.payload));
-  //         setopenDialogue(false); // Close the login dialogue
-  //       }
-  //     }
-  //   };
-
-  //   // Add event listener for receiving messages
-  //   window.addEventListener("message", handleMessage);
-
-  //   // Cleanup the event listener on unmount
-  //   return () => {
-  //     window.removeEventListener("message", handleMessage);
-  //   };
-  // }, []);
-
-  // const login = useGoogleLogin({
-  //   onSuccess: (response) => {
-  //     // Send message directly from the current window (no need for a popup)
-  //     window.postMessage(
-  //       { type: "google-login-success", payload: response },
-  //       "http://localhost:5173" // Replace with your app's origin
-  //     );
-
-  //     console.log("Login Success: ", response);
-  //   },
-  //   onError: (error) => {
-  //     console.log("Login Error: ", error);
-  //   },
-  // });
-
-  const hanndleInputChange = (name, value) => {
-    // if(name === "noOfDays" && value <1){ {
-    //   return ;
-    // }
+  const handleInputChange = (name, value) => {
     setFormData({ ...formData, [name]: value });
   };
 
@@ -77,7 +35,6 @@ function CreateTrip() {
   }, [formData]);
 
   const login = useGoogleLogin({
-    // clientId: import.meta.env.VITE_OAUTH_CLIENT_ID,
     onSuccess: (response) => {
       // localStorage.setItem("user", JSON.stringify(response));
       // setopenDialogue(false);
@@ -102,7 +59,6 @@ function CreateTrip() {
       !formData?.traveller
     ) {
       toast("Please fill all the fields");
-      // alert("Please enter valid number of days");
       return;
     }
 
@@ -161,7 +117,7 @@ function CreateTrip() {
               place,
               onChange: (v) => {
                 setPlace(v);
-                hanndleInputChange("location", v);
+                handleInputChange("location", v);
               },
             }}
           />
@@ -174,7 +130,7 @@ function CreateTrip() {
           <Input
             placeholder={"Ex.3"}
             type="number"
-            onChange={(e) => hanndleInputChange("noOfDays", e.target.value)}
+            onChange={(e) => handleInputChange("noOfDays", e.target.value)}
           />
         </div>
       </div>
@@ -184,7 +140,7 @@ function CreateTrip() {
           {SelectBudgetOptions.map((item, index) => (
             <div
               key={index}
-              onClick={() => hanndleInputChange("budget", item.title)}
+              onClick={() => handleInputChange("budget", item.title)}
               className={`p-4 border cursor-pointer rounded-lg hover:shadow-lg ${
                 formData.budget == item.title ? "shadow-lg border-black" : ""
               }`}
@@ -205,7 +161,7 @@ function CreateTrip() {
           {SelectTravelesList.map((item, index) => (
             <div
               key={index}
-              onClick={() => hanndleInputChange("traveller", item.people)}
+              onClick={() => handleInputChange("traveller", item.people)}
               className={`p-4 border cursor-pointer rounded-lg hover:shadow-lg ${
                 formData.traveller == item.people
                   ? "shadow-lg border-black"
