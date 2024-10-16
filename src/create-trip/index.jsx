@@ -19,12 +19,26 @@ import { FcGoogle } from "react-icons/fc";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 
+import { setDoc } from "firebase/firestore";
+import { doc } from "firebase/firestore";
+import { db } from "@/service/firebaseConfig";
+
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import js from "@eslint/js";
+
+
+
+
 console.log(SelectBudgetOptions);
 
 function CreateTrip() {
   const [place, setPlace] = useState("");
   const [formData, setFormData] = useState([]);
   const [openDialogue, setopenDialogue] = useState(false);
+
+  // maintaining the loading state
+  const [loading, setLoading] = useState(false);
+
 
   const handleInputChange = (name, value) => {
     setFormData({ ...formData, [name]: value });
@@ -62,6 +76,9 @@ function CreateTrip() {
       return;
     }
 
+        //set loading state
+        setLoading(true);
+
     const FinalPrompt = AI_PROMPT.replace(
       "{location}",
       formData.location?.label
@@ -75,7 +92,30 @@ function CreateTrip() {
 
     const result = await chatSession.sendMessage(FinalPrompt);
     console.log(result?.response?.text());
+    const TripData = result?.response?.text();
+    setLoading(false);
+    SaveAiTrip(TripData);
   };
+
+  const SaveAiTrip=async(TripData)=>{
+
+    setLoading(true);  // rishabh: set loading state
+
+    const docId = Date.now().toString()
+    const user = JSON.parse(localStorage.getItem("user"));
+    
+
+  await setDoc(doc(db, "AITrips", docId), {
+               userSelection: formData,
+               TripData: JSON.parse(TripData),
+               userEmail: user?.email,
+               id: docId,
+    });
+
+    setLoading(false);
+
+  }
+
 
   const getUserProfile = async (tokenInfo) => {
     axios
@@ -177,10 +217,15 @@ function CreateTrip() {
       </div>
       <div className="my-10 justify-end flex">
         <button
-          onClick={onGenerateTrip}
-          style={{ color: "white", backgroundColor: "black" }}
-        >
-          Generate Trip
+           className="text-white"
+          disabled={loading} 
+          onClick={onGenerateTrip}>
+          {loading?    // added by rishabh
+            
+            <AiOutlineLoading3Quarters className="h-7 w-7 animate-spin" />:'Generate Trip'
+          }
+            
+            
         </button>
       </div>
 

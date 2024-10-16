@@ -1,5 +1,3 @@
-// import { StrictMode } from 'react'
-// import { createRoot } from 'react-dom/client'
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
@@ -20,6 +18,7 @@ const router = createBrowserRouter([
     element: <CreateTrip />,
   },
 ]);
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <GoogleOAuthProvider clientId={import.meta.env.VITE_OAUTH_CLIENT_ID}>
@@ -27,6 +26,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Toaster />
       <RouterProvider router={router} />
     </GoogleOAuthProvider>
-    ;
   </React.StrictMode>
 );

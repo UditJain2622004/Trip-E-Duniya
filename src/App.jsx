@@ -1,15 +1,17 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
+import React from "react";
+import { useState } from "react";
 import "./App.css";
-// import {Button} from './components/ui/button'
 import Hero from "./components/ui/custom/Hero";
-function App() {
-  // const [count, setCount] = useState(0)
 
+// Import named Firebase services (app, analytics, db)
+import { app, analytics, db } from "./service/firebaseConfig";
+
+function App() {
+  // You can use Firebase services (e.g., db) inside components as needed
+  
   return (
     <>
-      {/* Hero*/}
+      {/* Hero Component */}
       <Hero />
     </>
   );
