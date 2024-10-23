@@ -25,6 +25,7 @@ import { db } from "@/service/firebaseConfig";
 
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import js from "@eslint/js";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -39,7 +40,7 @@ function CreateTrip() {
   // maintaining the loading state
   const [loading, setLoading] = useState(false);
 
-
+  const navigate=useNavigate();
   const handleInputChange = (name, value) => {
     setFormData({ ...formData, [name]: value });
   };
@@ -113,6 +114,7 @@ function CreateTrip() {
     });
 
     setLoading(false);
+    navigate('/view-trip/'+docId)
 
   }
 
