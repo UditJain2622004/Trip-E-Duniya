@@ -27,9 +27,6 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import js from "@eslint/js";
 import { useNavigate } from "react-router-dom";
 
-
-
-
 console.log(SelectBudgetOptions);
 
 function CreateTrip() {
@@ -40,7 +37,7 @@ function CreateTrip() {
   // maintaining the loading state
   const [loading, setLoading] = useState(false);
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const handleInputChange = (name, value) => {
     setFormData({ ...formData, [name]: value });
   };
@@ -77,8 +74,8 @@ function CreateTrip() {
       return;
     }
 
-        //set loading state
-        setLoading(true);
+    //set loading state
+    setLoading(true);
 
     const FinalPrompt = AI_PROMPT.replace(
       "{location}",
@@ -98,26 +95,22 @@ function CreateTrip() {
     SaveAiTrip(TripData);
   };
 
-  const SaveAiTrip=async(TripData)=>{
+  const SaveAiTrip = async (TripData) => {
+    setLoading(true); // rishabh: set loading state
 
-    setLoading(true);  // rishabh: set loading state
-
-    const docId = Date.now().toString()
+    const docId = Date.now().toString();
     const user = JSON.parse(localStorage.getItem("user"));
-    
 
-  await setDoc(doc(db, "AITrips", docId), {
-               userSelection: formData,
-               TripData: JSON.parse(TripData),
-               userEmail: user?.email,
-               id: docId,
+    await setDoc(doc(db, "AITrips", docId), {
+      userSelection: formData,
+      TripData: JSON.parse(TripData),
+      userEmail: user?.email,
+      id: docId,
     });
 
     setLoading(false);
-    navigate('/view-trip/'+docId)
-
-  }
-
+    navigate("/view-trip/" + docId);
+  };
 
   const getUserProfile = async (tokenInfo) => {
     axios
@@ -219,15 +212,15 @@ function CreateTrip() {
       </div>
       <div className="my-10 justify-end flex">
         <button
-           className="text-white"
-          disabled={loading} 
-          onClick={onGenerateTrip}>
-          {loading?    // added by rishabh
-            
-            <AiOutlineLoading3Quarters className="h-7 w-7 animate-spin" />:'Generate Trip'
-          }
-            
-            
+          className="text-white bg-blue-500"
+          disabled={loading}
+          onClick={onGenerateTrip}
+        >
+          {loading ? ( // added by rishabh
+            <AiOutlineLoading3Quarters className="h-7 w-7 animate-spin" />
+          ) : (
+            "Generate Trip"
+          )}
         </button>
       </div>
 
