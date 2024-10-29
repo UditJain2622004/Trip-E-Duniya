@@ -110,6 +110,7 @@ function CreateTrip() {
 
     setLoading(false);
     navigate("/view-trip/" + docId);
+    window.location.reload();
   };
 
   const getUserProfile = async (tokenInfo) => {
@@ -123,11 +124,12 @@ function CreateTrip() {
           },
         }
       )
-      .then((response) => {
+      .then(async (response) => {
         console.log(response);
         localStorage.setItem("user", JSON.stringify(response.data));
         setopenDialogue(false);
-        onGenerateTrip();
+        await onGenerateTrip();
+        // window.location.reload();
       });
   };
 
@@ -156,10 +158,10 @@ function CreateTrip() {
               },
             }}
           />
-          <button style={{ color: "white" }}>Enter destination</button>
+          {/* <button style={{ color: "black" }}>Enter destination</button> */}
         </div>
         <div>
-          <h2 className="font-bold text-3xl">
+          <h2 className="font-bold text-3xl pb-4">
             For how many days you are planning your trip
           </h2>
           <Input
@@ -170,8 +172,8 @@ function CreateTrip() {
         </div>
       </div>
       <div>
-        <h2 className="font-bold text-3xl">What is your budget?</h2>
-        <div className="grid grid-cols-3 gap-5 mt-5">
+        <h2 className="font-bold text-3xl pt-10  pb-4">What is your budget?</h2>
+        <div className="grid grid-cols-3 gap-5">
           {SelectBudgetOptions.map((item, index) => (
             <div
               key={index}
@@ -189,10 +191,10 @@ function CreateTrip() {
       </div>
 
       <div>
-        <h2 className="font-bold text-3xl">
+        <h2 className="font-bold text-3xl pt-10  pb-4">
           With whom are you planning your next trip-e ride?
         </h2>
-        <div className="grid grid-cols-3 gap-5 mt-5">
+        <div className="grid grid-cols-3 gap-5">
           {SelectTravelesList.map((item, index) => (
             <div
               key={index}
@@ -224,7 +226,7 @@ function CreateTrip() {
         </button>
       </div>
 
-      <Dialog open={openDialogue}>
+      <Dialog open={openDialogue} onOpenChange={setopenDialogue}>
         {/* <DialogTrigger>Open</DialogTrigger> */}
         <DialogContent>
           <DialogHeader>

@@ -13,26 +13,45 @@ import MyTrips from "./my-trips/index.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <>
+        <Header />
+        <App />
+      </>
+    ),
   },
   {
     path: "/create-trip",
-    element: <CreateTrip />,
+    element: (
+      <>
+        <Header />
+        <CreateTrip />
+      </>
+    ),
   },
   {
-    path: '/view-trip/:tripId',
-    element:<Viewtrip/>
+    path: "/view-trip/:tripId",
+    element: (
+      <>
+        <Header />
+        <Viewtrip />
+      </>
+    ),
   },
   {
-    path: '/my-trips',
-    elememt:<MyTrips/>
-  }
+    path: "/my-trips",
+    elememt: (
+      <>
+        <Header />
+        <MyTrips />
+      </>
+    ),
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <GoogleOAuthProvider clientId={import.meta.env.VITE_OAUTH_CLIENT_ID}>
-      <Header />
       <Toaster />
       <RouterProvider router={router} />
     </GoogleOAuthProvider>
