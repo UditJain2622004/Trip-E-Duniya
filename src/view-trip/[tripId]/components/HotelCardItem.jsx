@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { GetPlacesDetails, PHOTO_REF_URL } from "@/service/GlobalAPI";
 
@@ -12,14 +13,14 @@ function HotelCardItem({ hotel }) {
     const data = {
       textQuery: hotel?.name,
     };
-    const result = await GetPlacesDetails(data).then((res) => {
-      console.log(res.data.places[0].photos[3].name);
+    await GetPlacesDetails(data).then((res) => {
+      // console.log(res.data.places[0].photos[3].name);
       const PhotoUrl = PHOTO_REF_URL.replace(
         "{NAME}",
         res.data.places[0].photos[3].name
       );
       setPhotoUrl(PhotoUrl);
-      console.log(PhotoUrl);
+      // console.log(PhotoUrl);
     });
   };
 

@@ -1,8 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
+/* eslint-disable react/prop-types */
 import HotelCardItem from "./HotelCardItem";
 
 function Hotels({ trip }) {
+  // console.log("========================================");
+  // console.log(trip);
   return (
     <div>
       <h2 className="font-bold text-xl mt-5">Hotel Recommendation</h2>

@@ -1,5 +1,6 @@
+/* eslint-disable react/prop-types */
 import { Button } from "@/components/ui/button";
-import React from "react";
+// import React from "react";
 import { IoIosSend } from "react-icons/io";
 import { GetPlacesDetails, PHOTO_REF_URL } from "@/service/GlobalAPI";
 import { useEffect, useState } from "react";
@@ -8,20 +9,23 @@ function InfoSection({ trip }) {
   const [photoUrl, setPhotoUrl] = useState("");
   useEffect(() => {
     trip && GetPlacePhoto();
-  }, []);
+  }, [trip]);
 
   const GetPlacePhoto = async () => {
     const data = {
       textQuery: trip?.userSelection?.location?.label,
     };
-    const result = await GetPlacesDetails(data).then((res) => {
-      console.log(res.data.places[0].photos[3].name);
+    // console.log("========================================" + data.textQuery);
+    // console.log(trip?.userSelection?.location?.label);
+
+    await GetPlacesDetails(data).then((res) => {
+      // console.log(res.data.places[0].photos[3].name);
       const PhotoUrl = PHOTO_REF_URL.replace(
         "{NAME}",
         res.data.places[0].photos[3].name
       );
       setPhotoUrl(PhotoUrl);
-      console.log(PhotoUrl);
+      // console.log(PhotoUrl);
     });
   };
   return (

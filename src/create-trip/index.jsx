@@ -24,10 +24,10 @@ import { doc } from "firebase/firestore";
 import { db } from "@/service/firebaseConfig";
 
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import js from "@eslint/js";
+// import js from "@eslint/js";
 import { useNavigate } from "react-router-dom";
 
-console.log(SelectBudgetOptions);
+// console.log(SelectBudgetOptions);
 
 function CreateTrip() {
   const [place, setPlace] = useState("");
@@ -43,7 +43,7 @@ function CreateTrip() {
   };
 
   useEffect(() => {
-    console.log(formData);
+    // console.log(formData);
   }, [formData]);
 
   const login = useGoogleLogin({
