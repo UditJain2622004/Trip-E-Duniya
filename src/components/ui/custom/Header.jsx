@@ -119,7 +119,7 @@ function Header() {
         )}
       </div>
 
-      <Dialog open={openDialogue}>
+      <Dialog open={openDialogue} onOpenChange={setopenDialogue}>
         {/* <DialogTrigger>Open</DialogTrigger> */}
         <DialogContent>
           <DialogHeader>

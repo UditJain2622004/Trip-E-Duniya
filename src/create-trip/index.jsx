@@ -39,6 +39,7 @@ function CreateTrip() {
 
   const navigate = useNavigate();
   const handleInputChange = (name, value) => {
+    value = Math.max(0, Number(value) || 0);
     setFormData({ ...formData, [name]: value });
   };
 
@@ -167,7 +168,9 @@ function CreateTrip() {
           <Input
             placeholder={"Ex.3"}
             type="number"
+            min="0"
             onChange={(e) => handleInputChange("noOfDays", e.target.value)}
+            value={formData.noOfDays || ""}
           />
         </div>
       </div>

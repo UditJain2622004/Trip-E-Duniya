@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 // import React from "react";
-import { IoIosSend } from "react-icons/io";
+// import { IoIosSend } from "react-icons/io";
 import { GetPlacesDetails, PHOTO_REF_URL } from "@/service/GlobalAPI";
 import { useEffect, useState } from "react";
 
@@ -52,9 +52,9 @@ function InfoSection({ trip }) {
             </h2>
           </div>
         </div>
-        <Button>
+        {/* <Button>
           <IoIosSend />
-        </Button>
+        </Button> */}
       </div>
     </div>
   );
