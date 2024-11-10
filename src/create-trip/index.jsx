@@ -39,7 +39,7 @@ function CreateTrip() {
 
   const navigate = useNavigate();
   const handleInputChange = (name, value) => {
-    value = Math.max(0, Number(value) || 0);
+    if (name == "noOfDays") value = Math.max(0, Number(value) || 0);
     setFormData({ ...formData, [name]: value });
   };
 
