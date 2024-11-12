@@ -107,7 +107,7 @@ function CreateTrip() {
     }
   };
 
-  const getValidJSONResponse = async (prompt, retries = 3) => {
+  const getValidJSONResponse = async (prompt, retries = 13) => {
     for (let attempt = 1; attempt <= retries; attempt++) {
       try {
         const result = await chatSession.sendMessage(prompt);
