@@ -89,11 +89,42 @@ function CreateTrip() {
 
     console.log(FinalPrompt);
 
-    const result = await chatSession.sendMessage(FinalPrompt);
-    console.log(result?.response?.text());
-    const TripData = result?.response?.text();
-    setLoading(false);
-    SaveAiTrip(TripData);
+    // const result = await chatSession.sendMessage(FinalPrompt);
+    // console.log(result?.response?.text());
+    // const TripData = result?.response?.text();
+    // setLoading(false);
+    // SaveAiTrip(TripData);
+
+    let TripData = await getValidJSONResponse(FinalPrompt);
+    if (TripData) {
+      setLoading(false);
+      SaveAiTrip(TripData);
+    } else {
+      setLoading(false);
+      toast.error(
+        "Failed to generate a valid trip itinerary. Please try again."
+      );
+    }
+  };
+
+  const getValidJSONResponse = async (prompt, retries = 3) => {
+    for (let attempt = 1; attempt <= retries; attempt++) {
+      try {
+        const result = await chatSession.sendMessage(prompt);
+        const textResponse = await result?.response?.text();
+
+        // Attempt to parse JSON
+        const parsedData = JSON.parse(textResponse);
+        return parsedData; // Return if parsing succeeds
+        // eslint-disable-next-line no-unused-vars
+      } catch (error) {
+        console.warn(`Attempt ${attempt} failed: Invalid JSON response.`);
+        if (attempt === retries) {
+          console.error("All attempts failed. Could not retrieve valid JSON.");
+          return null; // Return null if all attempts fail
+        }
+      }
+    }
   };
 
   const SaveAiTrip = async (TripData) => {
@@ -104,7 +135,8 @@ function CreateTrip() {
 
     await setDoc(doc(db, "AITrips", docId), {
       userSelection: formData,
-      TripData: JSON.parse(TripData),
+      TripData: TripData,
+      // TripData: JSON.parse(TripData),
       userEmail: user?.email,
       id: docId,
     });
